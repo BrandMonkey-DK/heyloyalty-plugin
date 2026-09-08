@@ -26,6 +26,28 @@ class HLNL_Settings {
 		return $links;
 	}
 
+	/**
+	 * @return array List of lists (each with "id" and "name") or empty array on failure.
+	 */
+	public static function get_lists() {
+		$cached = get_transient( 'hlnl_lists' );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+
+		$api = HLNL_API::from_settings();
+		if ( ! $api->has_credentials() ) {
+			return array();
+		}
+
+		$response = $api->get_lists();
+		$lists    = is_wp_error( $response ) ? array() : $response;
+
+		set_transient( 'hlnl_lists', $lists, 5 * MINUTE_IN_SECONDS );
+
+		return $lists;
+	}
+
 	public static function get_options() {
 		$defaults = array(
 			'api_key'         => '',
@@ -63,6 +85,8 @@ class HLNL_Settings {
 
 	public static function sanitize( $input ) {
 		$input = is_array( $input ) ? $input : array();
+
+		delete_transient( 'hlnl_lists' );
 
 		return array(
 			'api_key'         => sanitize_text_field( $input['api_key'] ?? '' ),
@@ -103,9 +127,24 @@ class HLNL_Settings {
 					<tr>
 						<th scope="row"><label for="hlnl_list_id"><?php esc_html_e( 'Default list ID', 'heyloyalty-newsletter' ); ?></label></th>
 						<td>
-							<input type="text" class="regular-text" id="hlnl_list_id"
-								name="<?php echo esc_attr( self::OPTION ); ?>[default_list_id]"
-								value="<?php echo esc_attr( $options['default_list_id'] ); ?>">
+							<?php $lists = self::get_lists(); ?>
+							<?php if ( ! empty( $lists ) ) : ?>
+								<select class="regular-text" id="hlnl_list_id" name="<?php echo esc_attr( self::OPTION ); ?>[default_list_id]">
+									<option value=""><?php esc_html_e( '— None —', 'heyloyalty-newsletter' ); ?></option>
+									<?php foreach ( $lists as $list ) : ?>
+										<?php $list_id = isset( $list['id'] ) ? (string) $list['id'] : ''; ?>
+										<?php if ( '' === $list_id ) : continue; endif; ?>
+										<option value="<?php echo esc_attr( $list_id ); ?>" <?php selected( $options['default_list_id'], $list_id ); ?>>
+											<?php echo esc_html( ( $list['name'] ?? '' ) . ' (#' . $list_id . ')' ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							<?php else : ?>
+								<input type="text" class="regular-text" id="hlnl_list_id"
+									name="<?php echo esc_attr( self::OPTION ); ?>[default_list_id]"
+									value="<?php echo esc_attr( $options['default_list_id'] ); ?>">
+								<p class="description"><?php esc_html_e( 'Enter your API key and secret and save to load the list of available lists.', 'heyloyalty-newsletter' ); ?></p>
+							<?php endif; ?>
 							<p class="description"><?php esc_html_e( 'Used when the shortcode has no list-id attribute.', 'heyloyalty-newsletter' ); ?></p>
 						</td>
 					</tr>

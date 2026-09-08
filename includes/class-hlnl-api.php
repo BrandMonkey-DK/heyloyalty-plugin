@@ -49,6 +49,13 @@ class HLNL_API {
 	}
 
 	/**
+	 * @return array|WP_Error List of lists, each with at least "id" and "name".
+	 */
+	public function get_lists() {
+		return $this->request( 'GET', '/loyalty/v1/lists' );
+	}
+
+	/**
 	 * @return array|WP_Error
 	 */
 	private function request( $method, $path, array $body = null ) {
