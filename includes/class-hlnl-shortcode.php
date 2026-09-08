@@ -42,8 +42,8 @@ class HLNL_Shortcode {
 			array(
 				'list-id'      => $defaults['default_list_id'],
 				'title'        => '',
-				'button'       => __( 'Tilmeld dig', 'heyloyalty-newsletter' ),
-				'success'      => __( 'Tak! Tjek venligst din indbakke for at bekræfte dit abonnement.', 'heyloyalty-newsletter' ),
+				'button'       => __( 'Tilmeld nyhedsbrev', 'heyloyalty-newsletter' ),
+				'success'      => __( 'Tak for din tilmelding!', 'heyloyalty-newsletter' ),
 				'opt-in'       => 'yes',
 				'skip-opt-in'  => 'no',
 			),
@@ -55,7 +55,7 @@ class HLNL_Shortcode {
 
 		if ( '' === $list_id ) {
 			return current_user_can( 'manage_options' )
-				? '<p>' . esc_html__( 'HeyLoyalty: mangler list-id-attribut.', 'heyloyalty-newsletter' ) . '</p>'
+				? '<p>' . esc_html__( 'Manglende list-id-attribut.', 'heyloyalty-newsletter' ) . '</p>'
 				: '';
 		}
 

@@ -3,7 +3,7 @@
  * Plugin Name: HeyLoyalty Newsletter
  * Description: Newsletter signup form shortcode that creates members in HeyLoyalty.
  * Version:     1.0.0
- * Author:      -
+ * Author:      BrandMonkey
  * License:     GPL-2.0-or-later
  * Text Domain: heyloyalty-newsletter
  */
