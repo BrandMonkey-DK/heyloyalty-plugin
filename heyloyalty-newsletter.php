@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HeyLoyalty Newsletter
  * Description: Newsletter signup form shortcode that creates members in HeyLoyalty.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      BrandMonkey
  * License:     GPL-2.0-or-later
  * Text Domain: heyloyalty-newsletter
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HLNL_VERSION', '1.0.0' );
+define( 'HLNL_VERSION', '1.0.1' );
 define( 'HLNL_FILE', __FILE__ );
 define( 'HLNL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'HLNL_URL', plugin_dir_url( __FILE__ ) );
