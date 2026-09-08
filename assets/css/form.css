@@ -1,0 +1,34 @@
+.hlnl-form {
+	max-width: 420px;
+}
+
+.hlnl-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0 0 12px;
+}
+
+.hlnl-field input {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.hlnl-hp {
+	position: absolute !important;
+	left: -9999px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.hlnl-message:empty {
+	display: none;
+}
+
+.hlnl-message--success {
+	color: #1a7f37;
+}
+
+.hlnl-message--error {
+	color: #b32d2e;
+}
