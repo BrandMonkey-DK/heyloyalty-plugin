@@ -14,6 +14,16 @@ class HLNL_Settings {
 	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'add_menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( HLNL_FILE ), array( __CLASS__, 'plugin_action_links' ) );
+	}
+
+	public static function plugin_action_links( $links ) {
+		$settings_url = admin_url( 'options-general.php?page=hlnl-settings' );
+		$settings_link = '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Indstillinger', 'heyloyalty-newsletter' ) . '</a>';
+
+		array_unshift( $links, $settings_link );
+
+		return $links;
 	}
 
 	public static function get_options() {

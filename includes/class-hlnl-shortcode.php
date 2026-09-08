@@ -28,8 +28,8 @@ class HLNL_Shortcode {
 				'endpoint' => esc_url_raw( rest_url( 'heyloyalty/v1/subscribe' ) ),
 				'nonce'    => wp_create_nonce( 'wp_rest' ),
 				'i18n'     => array(
-					'error'   => __( 'Something went wrong. Please try again.', 'heyloyalty-newsletter' ),
-					'sending' => __( 'Sending…', 'heyloyalty-newsletter' ),
+					'error'   => __( 'Noget gik galt. Prøv venligst igen.', 'heyloyalty-newsletter' ),
+					'sending' => __( 'Sender…', 'heyloyalty-newsletter' ),
 				),
 			)
 		);
@@ -42,8 +42,8 @@ class HLNL_Shortcode {
 			array(
 				'list-id'      => $defaults['default_list_id'],
 				'title'        => '',
-				'button'       => __( 'Subscribe', 'heyloyalty-newsletter' ),
-				'success'      => __( 'Thanks! Please check your inbox to confirm your subscription.', 'heyloyalty-newsletter' ),
+				'button'       => __( 'Tilmeld dig', 'heyloyalty-newsletter' ),
+				'success'      => __( 'Tak! Tjek venligst din indbakke for at bekræfte dit abonnement.', 'heyloyalty-newsletter' ),
 				'opt-in'       => 'yes',
 				'skip-opt-in'  => 'no',
 			),
@@ -55,7 +55,7 @@ class HLNL_Shortcode {
 
 		if ( '' === $list_id ) {
 			return current_user_can( 'manage_options' )
-				? '<p>' . esc_html__( 'HeyLoyalty: missing list-id attribute.', 'heyloyalty-newsletter' ) . '</p>'
+				? '<p>' . esc_html__( 'HeyLoyalty: mangler list-id-attribut.', 'heyloyalty-newsletter' ) . '</p>'
 				: '';
 		}
 
@@ -81,20 +81,17 @@ class HLNL_Shortcode {
 			<?php endif; ?>
 
 			<p class="hlnl-field">
-				<label for="<?php echo esc_attr( $id ); ?>-firstname"><?php esc_html_e( 'First name', 'heyloyalty-newsletter' ); ?></label>
-				<input type="text" name="firstname" id="<?php echo esc_attr( $id ); ?>-firstname" autocomplete="given-name" required>
+				<input type="text" name="firstname" id="<?php echo esc_attr( $id ); ?>-firstname" placeholder="<?php esc_attr_e( 'Fornavn', 'heyloyalty-newsletter' ); ?>" autocomplete="given-name" required>
 			</p>
 			<p class="hlnl-field">
-				<label for="<?php echo esc_attr( $id ); ?>-lastname"><?php esc_html_e( 'Last name', 'heyloyalty-newsletter' ); ?></label>
-				<input type="text" name="lastname" id="<?php echo esc_attr( $id ); ?>-lastname" autocomplete="family-name" required>
+				<input type="text" name="lastname" id="<?php echo esc_attr( $id ); ?>-lastname" placeholder="<?php esc_attr_e( 'Efternavn', 'heyloyalty-newsletter' ); ?>" autocomplete="family-name" required>
 			</p>
 			<p class="hlnl-field">
-				<label for="<?php echo esc_attr( $id ); ?>-email"><?php esc_html_e( 'Email', 'heyloyalty-newsletter' ); ?></label>
-				<input type="email" name="email" id="<?php echo esc_attr( $id ); ?>-email" autocomplete="email" required>
+				<input type="email" name="email" id="<?php echo esc_attr( $id ); ?>-email" placeholder="<?php esc_attr_e( 'E-mail', 'heyloyalty-newsletter' ); ?>" autocomplete="email" required>
 			</p>
 
 			<p class="hlnl-hp" aria-hidden="true">
-				<label><?php esc_html_e( 'Leave this field empty', 'heyloyalty-newsletter' ); ?>
+				<label><?php esc_html_e( 'Lad dette felt være tomt', 'heyloyalty-newsletter' ); ?>
 					<input type="text" name="hlnl_hp" tabindex="-1" autocomplete="off">
 				</label>
 			</p>

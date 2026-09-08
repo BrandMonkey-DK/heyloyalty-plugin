@@ -53,7 +53,7 @@ class HLNL_API {
 	 */
 	private function request( $method, $path, array $body = null ) {
 		if ( ! $this->has_credentials() ) {
-			return new WP_Error( 'hlnl_missing_credentials', __( 'HeyLoyalty API credentials are not configured.', 'heyloyalty-newsletter' ) );
+			return new WP_Error( 'hlnl_missing_credentials', __( 'API credentials are not configured.', 'heyloyalty-newsletter' ) );
 		}
 
 		// RFC 1123 date in GMT, e.g. "Mon, 08 Sep 2026 10:11:12 GMT".
