@@ -31,6 +31,7 @@ class HLNL_Settings {
 			'api_key'         => '',
 			'api_secret'      => '',
 			'default_list_id' => '',
+			'custom_css'      => '',
 		);
 
 		$options = get_option( self::OPTION, array() );
@@ -67,6 +68,7 @@ class HLNL_Settings {
 			'api_key'         => sanitize_text_field( $input['api_key'] ?? '' ),
 			'api_secret'      => sanitize_text_field( $input['api_secret'] ?? '' ),
 			'default_list_id' => sanitize_text_field( $input['default_list_id'] ?? '' ),
+			'custom_css'      => wp_strip_all_tags( $input['custom_css'] ?? '' ),
 		);
 	}
 
@@ -105,6 +107,14 @@ class HLNL_Settings {
 								name="<?php echo esc_attr( self::OPTION ); ?>[default_list_id]"
 								value="<?php echo esc_attr( $options['default_list_id'] ); ?>">
 							<p class="description"><?php esc_html_e( 'Used when the shortcode has no list-id attribute.', 'heyloyalty-newsletter' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="hlnl_custom_css"><?php esc_html_e( 'Custom CSS', 'heyloyalty-newsletter' ); ?></label></th>
+						<td>
+							<textarea class="large-text code" id="hlnl_custom_css" rows="10"
+								name="<?php echo esc_attr( self::OPTION ); ?>[custom_css]"><?php echo esc_textarea( $options['custom_css'] ); ?></textarea>
+							<p class="description"><?php esc_html_e( 'Extra CSS applied to the newsletter form on the frontend.', 'heyloyalty-newsletter' ); ?></p>
 						</td>
 					</tr>
 				</table>

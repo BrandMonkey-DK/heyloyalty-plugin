@@ -21,6 +21,11 @@ class HLNL_Shortcode {
 	public static function register_assets() {
 		wp_register_style( 'hlnl-form', HLNL_URL . 'assets/css/form.css', array(), HLNL_VERSION );
 		wp_register_script( 'hlnl-form', HLNL_URL . 'assets/js/form.js', array(), HLNL_VERSION, true );
+
+		$custom_css = trim( HLNL_Settings::get_options()['custom_css'] );
+		if ( '' !== $custom_css ) {
+			wp_add_inline_style( 'hlnl-form', $custom_css );
+		}
 		wp_localize_script(
 			'hlnl-form',
 			'HLNL_Config',
